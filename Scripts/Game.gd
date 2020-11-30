@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var enemy = preload("res://Enemy.tscn")
-onready var player = preload("res://Player.tscn")
+onready var enemy = preload("res://scenes/Enemy.tscn")
+onready var player = preload("res://scenes/Player.tscn")
 onready var enemy_timer = $EnemySpawnTimer
 onready var menu = $Menu
 onready var in_game_music = $InGameMusic

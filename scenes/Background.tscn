@@ -1,13 +1,16 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Ground.gd" type="Script" id=1]
-[ext_resource path="res://Mid.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Ground.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Mid.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/mid.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/ground.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/bg.png" type="Texture" id=5]
 [ext_resource path="res://assets/images/sun.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/cloud.png" type="Texture" id=12]
-[ext_resource path="res://Cloud.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Cloud.gd" type="Script" id=13]
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "cloud"
