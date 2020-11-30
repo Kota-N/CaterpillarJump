@@ -1,0 +1,136 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Ground.gd" type="Script" id=1]
+[ext_resource path="res://Mid.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/mid.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/ground.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/bg.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/sun.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/cloud.png" type="Texture" id=12]
+[ext_resource path="res://Cloud.gd" type="Script" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "cloud"
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1.6245 ),
+"update": 0,
+"values": [ Vector2( 250, 150 ), Vector2( 400, 150 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4, 5.9, 8, 10, 12, 14, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, 0.0, -5.0, 0.0, 5.0, 0.0, -5.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Sun:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4, 8, 12, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, 0.0, -10.0, 0.0 ]
+}
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float scroll_speed;
+
+void fragment() {
+	vec2 newuv = UV;
+	newuv.x += TIME * scroll_speed;
+	vec4 c = texture(TEXTURE, newuv);
+	COLOR = c;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/scroll_speed = null
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform float scroll_speed;
+
+void fragment() {
+	vec2 newuv = UV;
+	newuv.x += TIME * scroll_speed;
+	vec4 c = texture(TEXTURE, newuv);
+	COLOR = c;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/scroll_speed = null
+
+[node name="Background" type="Node2D"]
+
+[node name="BG" type="Sprite" parent="."]
+position = Vector2( 500, 278.231 )
+scale = Vector2( 0.85, 0.97 )
+texture = ExtResource( 5 )
+
+[node name="Cloud" type="Sprite" parent="."]
+position = Vector2( 388.025, 150 )
+rotation = -0.0265407
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+script = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cloud"]
+anims/cloud = SubResource( 1 )
+
+[node name="Sun" type="Sprite" parent="."]
+position = Vector2( 800, 150 )
+rotation = 0.0278678
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Mid" type="TextureRect" parent="."]
+modulate = Color( 0.203922, 0.364706, 0.243137, 1 )
+material = SubResource( 3 )
+margin_left = -43.1142
+margin_top = -15.2168
+margin_right = 1196.89
+margin_bottom = 584.783
+texture = ExtResource( 3 )
+stretch_mode = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ground" type="TextureRect" parent="."]
+modulate = Color( 0.635294, 0.631373, 0.611765, 1 )
+material = SubResource( 5 )
+margin_left = -11.7889
+margin_top = -18.6447
+margin_right = 1228.21
+margin_bottom = 581.355
+texture = ExtResource( 4 )
+stretch_mode = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
